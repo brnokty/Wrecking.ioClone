@@ -8,8 +8,8 @@ public class Joystick : MonoBehaviour
 
     private float savedNormalizedDistanceX;
     private float savedNormalizedDistanceY;
-    public float Horizontal => GetHorizontalValue();
-    public float Vertical => GetVerticalValue();
+    public float Horizontal => Mathf.Clamp(GetHorizontalValue(), -1.5f, 1.5f);
+    public float Vertical => Mathf.Clamp(GetVerticalValue(), -1.5f, 1.5f);
 
     private void Update()
     {

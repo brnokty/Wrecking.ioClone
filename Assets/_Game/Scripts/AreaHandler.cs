@@ -31,7 +31,7 @@ public class AreaHandler : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        print("Timer : " + timer);
+        // print("Timer : " + timer);
         if (timer >= startDuration)
             tempTimer += Time.deltaTime;
 
