@@ -9,6 +9,16 @@ public class Ball : MonoBehaviour
     [SerializeField] private List<GameObject> balls = new List<GameObject>();
 
 
+    public Transform target;
+    public Transform player;
+    public float speed;
+    public float elasticity;
+    public float feverTime = 10f;
+    public float rotateSpeed = 20f;
+
+    private Vector3 velocity;
+    private bool isFeverMode;
+
     private void Start()
     {
         balls[0].SetActive(false);
@@ -17,17 +27,11 @@ public class Ball : MonoBehaviour
         velocity = Vector3.zero;
     }
 
-
-  
-    public Transform target;
-    public float speed;
-    public float elasticity;
-
-    private Vector3 velocity;
-    
-
     void Update()
     {
+        if (isFeverMode)
+            return;
+
         Vector3 desiredPosition = target.position;
         Vector3 currentPosition = transform.position;
 
@@ -49,9 +53,31 @@ public class Ball : MonoBehaviour
         // Dampen the velocity to simulate friction or air resistance
         velocity *= 1f - (speed * Time.deltaTime);
     }
-    
-    
-    
+
+
+    public void GetFever()
+    {
+        if (!isFeverMode)
+            StartCoroutine(RotateObjectForDuration(feverTime));
+    }
+
+    IEnumerator RotateObjectForDuration(float rotationDuration)
+    {
+        isFeverMode = true;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < rotationDuration)
+        {
+            transform.RotateAround(player.position, Vector3.up, rotateSpeed * Time.deltaTime);
+
+            elapsedTime += Time.deltaTime;
+            print("ele " + elapsedTime);
+            yield return null;
+        }
+
+        isFeverMode = false;
+    }
+
     // public Transform target;
     //
     // public float speed;

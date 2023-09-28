@@ -7,6 +7,7 @@ public class CarMovement : MonoBehaviour
 {
     [SerializeField] private float carSpeed = 100f;
     [SerializeField] private float turnSpeed = 100f;
+    [SerializeField] private Ball ball;
     [SerializeField] private Transform carPoint;
     [SerializeField] protected List<Transform> frontWheels = new List<Transform>();
     protected bool isGameStarted;
@@ -32,12 +33,22 @@ public class CarMovement : MonoBehaviour
     protected void RotateWheels(float horizontalValue)
     {
         float rotationSpeed = 10f; // Dönme hızı
-        float maxRotationAngle = 40f; // Maksimum dönme açısı
+        float maxRotationAngle = 10f; // Maksimum dönme açısı
 
         float rotationAmount = horizontalValue * rotationSpeed * maxRotationAngle;
         for (int i = 0; i < frontWheels.Count; i++)
         {
             frontWheels[i].rotation = Quaternion.Euler(90f, rotationAmount, 0f);
+        }
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("DropBox"))
+        {
+            Destroy(other.transform.parent.gameObject);
+            ball.GetFever();
         }
     }
 }

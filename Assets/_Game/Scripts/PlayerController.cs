@@ -8,6 +8,7 @@ public class PlayerController : CarMovement
     [SerializeField] private Joystick joystick;
     
     [SerializeField] private CharacterCanvas characterCanvas;
+   
 
 
     protected override void StartCharacter(EventArgs args)

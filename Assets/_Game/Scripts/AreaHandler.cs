@@ -9,12 +9,22 @@ public struct AreaCircle
 {
     public List<AreaCell> areaParts;
 
-    public void GoDown(Color _color)
+
+    public IEnumerator OneBYOneGODown(Color _color, AreaHandler _areaHandler)
     {
         for (int i = 0; i < areaParts.Count; i++)
         {
-            areaParts[i].GoDown(_color);
+            areaParts[i].DyeCell(_color);
         }
+
+        yield return new WaitForSeconds(3f);
+        for (int i = 0; i < areaParts.Count; i++)
+        {
+            areaParts[i].GoDown();
+            yield return new WaitForSeconds(0.02f);
+        }
+
+        _areaHandler.isDestroyed = true;
     }
 }
 
@@ -27,9 +37,14 @@ public class AreaHandler : MonoBehaviour
     private float timer = 0f;
     private float tempTimer = 0f;
 
+    [HideInInspector] public bool isDestroyed = true;
+
 
     void Update()
     {
+        if (!isDestroyed)
+            return;
+
         timer += Time.deltaTime;
         // print("Timer : " + timer);
         if (timer >= startDuration)
@@ -46,10 +61,11 @@ public class AreaHandler : MonoBehaviour
     {
         if (areaCircles.Count <= 0)
             return;
+        isDestroyed = false;
 
         tempTimer = 0f;
         var circle = areaCircles.Last();
-        circle.GoDown(destroyColor);
+        StartCoroutine(circle.OneBYOneGODown(destroyColor, this));
         areaCircles.RemoveAt(areaCircles.Count - 1);
     }
 }
