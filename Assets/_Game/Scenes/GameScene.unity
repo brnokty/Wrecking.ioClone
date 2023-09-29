@@ -6971,6 +6971,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: bc54595f02c7fd5418bf2c8f76f0ab8d, type: 2}
+    - target: {fileID: 3193003302256954956, guid: 6d8018836f91e684e9b08586da0663eb, type: 3}
+      propertyPath: m_text
+      value: Bager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3193003302256954956, guid: 6d8018836f91e684e9b08586da0663eb, type: 3}
+      propertyPath: m_fontSize
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3193003302790292492, guid: 6d8018836f91e684e9b08586da0663eb, type: 3}
       propertyPath: m_Camera
       value: 
@@ -7023,6 +7031,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3193003303508599774, guid: 6d8018836f91e684e9b08586da0663eb, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d330dc123451c7045bdfa0786b08e7b7, type: 3}
     - target: {fileID: 3736243705016073237, guid: 6d8018836f91e684e9b08586da0663eb, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -8149,6 +8161,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 67f8662a56c7a3447a6dcc354bae985b, type: 2}
+    - target: {fileID: 3193003302256954956, guid: 6d8018836f91e684e9b08586da0663eb, type: 3}
+      propertyPath: m_text
+      value: Sophia
+      objectReference: {fileID: 0}
+    - target: {fileID: 3193003302256954956, guid: 6d8018836f91e684e9b08586da0663eb, type: 3}
+      propertyPath: m_fontSize
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3193003302790292492, guid: 6d8018836f91e684e9b08586da0663eb, type: 3}
       propertyPath: m_Camera
       value: 
@@ -8201,6 +8221,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3193003303508599774, guid: 6d8018836f91e684e9b08586da0663eb, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 17a8c5d6f14967a4db15bb6dbb971e50, type: 3}
     - target: {fileID: 3736243705016073237, guid: 6d8018836f91e684e9b08586da0663eb, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -23426,6 +23450,14 @@ PrefabInstance:
     - target: {fileID: 3154044672973681725, guid: 6d8018836f91e684e9b08586da0663eb, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3193003302256954956, guid: 6d8018836f91e684e9b08586da0663eb, type: 3}
+      propertyPath: m_text
+      value: Liam
+      objectReference: {fileID: 0}
+    - target: {fileID: 3193003302256954956, guid: 6d8018836f91e684e9b08586da0663eb, type: 3}
+      propertyPath: m_fontSize
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3193003302790292492, guid: 6d8018836f91e684e9b08586da0663eb, type: 3}
       propertyPath: m_Camera

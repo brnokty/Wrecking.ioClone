@@ -34,9 +34,9 @@ public class Ball : MonoBehaviour
 
     public void LevelStart(EventArgs args)
     {
+        isGameStarted = true;
         var _scale = Vector3.one * (1 + MainManager.Instance.GameManager.BallSizeLevel * 0.1f);
-        transform.parent.DOScale(_scale, 0.3f);
-        transform.SetParent(null);
+        transform.parent.DOScale(_scale, 0.3f).OnComplete(() => { transform.SetParent(null); });
     }
 
     public void BallUpdate(EventArgs args)
