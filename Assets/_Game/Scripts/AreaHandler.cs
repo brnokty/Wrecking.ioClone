@@ -36,13 +36,26 @@ public class AreaHandler : MonoBehaviour
     [SerializeField] private float cellDecreaseDuration = 10f;
     private float timer = 0f;
     private float tempTimer = 0f;
+    private bool isGameStarted;
+    private bool isGameFinished;
 
     [HideInInspector] public bool isDestroyed = true;
 
 
+    private void Start()
+    {
+        MainManager.Instance.EventManager.Register(EventTypes.LevelStart, StartDecreasingArea);
+    }
+
+
+    private void StartDecreasingArea(EventArgs args)
+    {
+        isGameStarted = true;
+    }
+
     void Update()
     {
-        if (!isDestroyed)
+        if (!isDestroyed || !isGameStarted)
             return;
 
         timer += Time.deltaTime;

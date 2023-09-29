@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -15,24 +16,42 @@ public class Ball : MonoBehaviour
     public float elasticity;
     public float feverTime = 10f;
     public float rotateSpeed = 20f;
+    public Rigidbody rb;
 
     private Vector3 velocity;
     private bool isFeverMode;
+    protected bool isGameStarted;
 
     private void Start()
     {
+        MainManager.Instance.EventManager.Register(EventTypes.LevelStart, LevelStart);
+        MainManager.Instance.EventManager.Register(EventTypes.UpgradePlayer, BallUpdate);
         balls[0].SetActive(false);
         balls[Random.Range(0, balls.Count)].SetActive(true);
-        transform.SetParent(null);
         velocity = Vector3.zero;
+    }
+
+
+    public void LevelStart(EventArgs args)
+    {
+        var _scale = Vector3.one * (1 + MainManager.Instance.GameManager.BallSizeLevel * 0.1f);
+        transform.parent.DOScale(_scale, 0.3f);
+        transform.SetParent(null);
+    }
+
+    public void BallUpdate(EventArgs args)
+    {
+        var _scale = Vector3.one * (1 + MainManager.Instance.GameManager.BallSizeLevel * 0.1f);
+        transform.parent.DOScale(_scale, 0.3f);
     }
 
     void Update()
     {
-        if (isFeverMode)
+        if (isFeverMode || !isGameStarted)
             return;
 
         Vector3 desiredPosition = target.position;
+
         Vector3 currentPosition = transform.position;
 
         // Calculate the direction towards the target
@@ -71,20 +90,27 @@ public class Ball : MonoBehaviour
             transform.RotateAround(player.position, Vector3.up, rotateSpeed * Time.deltaTime);
 
             elapsedTime += Time.deltaTime;
-            print("ele " + elapsedTime);
             yield return null;
         }
 
         isFeverMode = false;
     }
 
-    // public Transform target;
-    //
-    // public float speed;
-    //
-    //
-    // void Update()
-    // {
-    //     transform.position = Vector3.Lerp(transform.position, target.position, speed * Time.deltaTime);
-    // }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if ((collision.collider.CompareTag("Player") || collision.collider.CompareTag("AI")) &&
+            collision.gameObject != player.gameObject)
+        {
+            float vel = rb.velocity.magnitude + 10f;
+
+            collision.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * vel * 1, ForceMode.VelocityChange);
+
+            // gameObject.GetComponentInParent<AnimatorController>().Hit();
+
+            Debug.Log($"Car launched with velocity of {vel}.");
+
+            // if (isPlayer) transform.parent.GetComponent<Customizer>().Hit(vel);
+        }
+    }
 }

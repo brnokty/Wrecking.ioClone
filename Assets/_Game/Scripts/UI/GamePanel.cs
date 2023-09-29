@@ -7,5 +7,11 @@ using UnityEngine.UI;
 
 public class GamePanel : Panel
 {
-  
+    [SerializeField] private TextMeshProUGUI coinText;
+
+
+    public void SetCoinUI(int value)
+    {
+        coinText.text = value.ToString();
+    }
 }

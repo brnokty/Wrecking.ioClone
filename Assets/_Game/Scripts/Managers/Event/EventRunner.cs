@@ -19,9 +19,9 @@ public class EventRunner : MonoBehaviour
     }
 
 
-    public void UpgradePlayer(bool value)
+    public void UpgradePlayer()
     {
-        MainManager.Instance.EventManager.InvokeEvent(EventTypes.UpgradePlayer, new BoolArgs(value));
+        MainManager.Instance.EventManager.InvokeEvent(EventTypes.UpgradePlayer, new EventArgs());
     }
 
 
@@ -32,12 +32,18 @@ public class EventRunner : MonoBehaviour
 
     public void Fail()
     {
+        if (MainManager.Instance.GameManager.GetGameFinished())
+            return;
         MainManager.Instance.EventManager.InvokeEvent(EventTypes.Fail);
+        MainManager.Instance.GameManager.SetGameFinished(true);
     }
 
     public void Win()
     {
+        if (MainManager.Instance.GameManager.GetGameFinished())
+            return;
         MainManager.Instance.EventManager.InvokeEvent(EventTypes.Win);
+        MainManager.Instance.GameManager.SetGameFinished(true);
     }
 
     #endregion
